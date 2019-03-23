@@ -28,10 +28,9 @@ int main(void)
 	wait(1000);
 	LED_OFF;
 	
-	/* Enable global interrupts, set Timer and overflow interrupts. */
+	/* Enable global interrupts and overflow interrupts. */
 	sei();
 	TIMSK1 |= (1 << TOIE1);
-	TCCR1A = 0;
 	
     while (1) 
     {
