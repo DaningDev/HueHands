@@ -5,5 +5,5 @@
  *  Author: danin
  */ 
 
-double calc_dist(void);
+double calc_dist(int *);
 

@@ -9,8 +9,8 @@
 
 void initTimerPWM()
 {
-	TCCR0A |= ((1 << FOC0A) | (1 << COM0A0) | (1 << CS00)); //Set on match, clear on TOP at 0C0A (=pd6)
-	TCCR0B |= ((1 << WGM00) | (1 << CS00)); //Start timer with PWM mode
+	TCCR0A |= ((1 << FOC0A) | (1 << COM0A0) | (1 << CS00)); 
+	TCCR0B |= ((1 << WGM00) | (1 << CS00)); 
 
 	OCR0A = 128;
 }

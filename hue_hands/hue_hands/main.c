@@ -4,8 +4,15 @@
  * Created: 2/27/2019 2:00:31 PM
  * Author : danin
  */ 
-#include "Include/ultrasonic.h"
 #include "Include/util.h"
+#include "Include/ultrasonic.h"
+
+int TimerOverflow = 0;
+
+ISR(TIMER1_OVF_vect)
+{
+	TimerOverflow++;
+}
 
 int main(void)
 {
@@ -13,26 +20,29 @@ int main(void)
 	DDRD |= (1 << PORTD2);
 	DDRB |= (1 << PORTB6);
 	
-	//Does it live?
+	/* Just to be safe. */
+	TRIGGER_OFF;
+	
+	/* Does it live? */
  	LED_ON;
 	wait(1000);
 	LED_OFF;
 	
-	//Just to be safe.
-	TRIGGER_OFF;
+	/* Enable global interrupts, set Timer and overflow interrupts. */
+	sei();
+	TIMSK1 |= (1 << TOIE1);
+	TCCR1A = 0;
 	
     while (1) 
     {
-		if(!(PINB & (1 << PINB0)))
+		if(BUTTON_PRESSED)
 		{
-			double distance = 0;
-			distance = calc_dist();
-			
 			LED_ON;
-			wait(distance*100);
+			wait(calc_dist(&TimerOverflow));
 			LED_OFF;
-		} 
-		else
+			wait(calc_dist(&TimerOverflow));
+		}
 		LED_OFF;
     }
 }
+

@@ -7,26 +7,38 @@
 #include "../Include/util.h"
 #include "../Include/ultrasonic.h"
 
-double calc_dist(void)
+double calc_dist(int *timerOverflow)
 {
-	//Reset last timer.
-	TCCR1B &= (~(1 << CS10) | ~(1 << CS12));
-	TCNT1 = 0;
+	long count;
+	double distance;
 	
-	//send trigger to ultra sonic sensor.
+	/* send trigger to ultra sonic sensor. */
 	TRIGGER_ON;
 	_delay_us(15);
 	TRIGGER_OFF;
 	
-	//Wait until echo signal is high (1).
-	while(!(PIND & (1 << PIND4)));
+	/* Clear Timer Counter, 
+	start timer on rising edge with no prescaler, 
+	clear input capture flag and 
+	clear overflow flag. */
+	TCNT1 = 0; 
+	TCCR1B |= ((1 << ICES1) | (1 << CS10)); 
+	TIFR1 = 1 << ICF1; 
+	TIFR1 = 1 << TOV1;
 	
-	//Start Timer with prescaler of 1024.
-	TCCR1B |= ((1 << CS10) | (1 << CS12));
+	/* Wait for rising edge */
+	while((TIFR1 & (1 << ICF1)) == 0);
+	TCNT1 = 0;
+	TCCR1B = 0x01;
+	TIFR1 = 1 << ICF1;
+	TIFR1 = 1 << TOV1;
+	timerOverflow = 0;
 	
-	//Wait until echo signal is low (0).
-	while((PIND & (1 << PIND4)));
+	/* Wait for falling edge */
+	while((TIFR1 & (1 << ICF1)) == 0);
 	
-	//read the clock value and do calculations. TODO
-	return TCNT1;
+	/* Calculate distance in cm based on 20Mhz timer frequency and the speed of sound */
+	count = ICR1 + (65535 * (int)timerOverflow);
+	distance = (double)count / 1166;
+	return distance;
 }
