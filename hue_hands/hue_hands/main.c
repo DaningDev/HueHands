@@ -6,6 +6,7 @@
  */ 
 #include "Include/util.h"
 #include "Include/ultrasonic.h"
+#include "Include/serial.h"
 
 int TimerOverflow = 0;
 
@@ -32,11 +33,14 @@ int main(void)
 	sei();
 	TIMSK1 |= (1 << TOIE1);
 	
+	initRTX();
+	
     while (1) 
     {
 		if(BUTTON_PRESSED)
 		{
 			LED_ON;
+			UDR0 = '8';
 			wait(calc_dist(&TimerOverflow));
 			LED_OFF;
 			wait(calc_dist(&TimerOverflow));
