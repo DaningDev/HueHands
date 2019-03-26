@@ -39,6 +39,6 @@ double calc_dist(int *timerOverflow)
 	
 	/* Calculate distance in cm based on 20Mhz timer frequency and the speed of sound */
 	count = ICR1 + (65535 * (int)timerOverflow);
-	distance = (double)count / 1166;
+	distance = (double)count / 933;
 	return distance;
 }

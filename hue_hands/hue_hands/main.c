@@ -40,7 +40,7 @@ int main(void)
 		if(BUTTON_PRESSED)
 		{
 			LED_ON;
-			UDR0 = '8';
+			UDR0 = '7';
 			wait(calc_dist(&TimerOverflow));
 			LED_OFF;
 			wait(calc_dist(&TimerOverflow));
