@@ -120,9 +120,31 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Include\pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\ultrasonic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\util.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Logic\pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Logic\ultrasonic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Logic\util.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Include" />
+    <Folder Include="Logic" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
