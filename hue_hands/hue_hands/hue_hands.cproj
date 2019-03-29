@@ -122,9 +122,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Include\pwm.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Include\serial.h">
       <SubType>compile</SubType>
     </Compile>
@@ -132,9 +129,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\util.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Logic\pwm.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Logic\serial.c">
