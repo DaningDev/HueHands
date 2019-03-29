@@ -4,7 +4,7 @@ import requests
 
 
 body = {"devicetype":"jordo"}
-r = requests.post("http://145.49.34.222/api", data=json.dumps(body))
+res = requests.post("http://192.168.2.15/api", data=json.dumps(body))
 print(r.content)
 content = json.loads(r.content)
 print(content["succes"]["username"])
