@@ -8,6 +8,7 @@
 #define F_CPU 16000000
 #define BAUD  9600
 #define BRC   ((F_CPU/16/BAUD) - 1)
+#define TX_BUFFER_SIZE	128
 
 #include <avr/io.h>
 #include <util/delay.h>
