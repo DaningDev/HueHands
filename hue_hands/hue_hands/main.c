@@ -62,16 +62,21 @@ int main(void)
     {
 		if(BUTTON_PRESSED)
 		{
+			LED_ON;
+			/* Calculate the distance using ultra sonic. */
 			distance = calc_dist(&TimerOverflow);
 			wait(100);
 			
-			serialWrite("Start\n\r");
+			/* Put the result into a char array and append \n\r for python script */
 			sprintf(data,"%.1lf", distance);
+			strcat(data, "\n\r");
+			
+			/* Write the data */
 			serialWrite(data);
-			serialWrite("Stop\n\r");
 			
 			wait(100);
 		}
+		LED_OFF;
     }
 }
 

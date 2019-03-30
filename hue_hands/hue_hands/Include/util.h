@@ -14,6 +14,9 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#include <stdio.h>
+#include <string.h>
+
 #define LED_ON		PORTD |= (1 << PORTD3)
 #define LED_OFF		PORTD &= ~(1 << PORTD3)
 
