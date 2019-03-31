@@ -9,6 +9,8 @@ import math
 # to find api on your network go to https://www.meethue.com/api/nupnp
 
 body = {"devicetype":"jordo"}
+
+# hardcodes ip adress
 res = requests.post("http://192.168.2.15/api", data=json.dumps(body))
 print(res.content)
 content = json.loads(res.content)
@@ -29,9 +31,9 @@ values = None
 
 # functions def
 
-def getColor(cm) :
+def getBrightness(cm) :
     print(cm)
-    body = {"hue": math.floor(cm * 1310)  }
+    body = {"bri": math.floor(cm * 5)  }
     res = requests.put("http://192.168.2.15/api/" + username + "/lights/1/state",data=json.dumps(body))
     print(res.content)
 
@@ -41,7 +43,7 @@ while 1:
     text = values[1:]
     try:
         value = None
-        getColor(float(text))
+        getBrightness(float(text))
     except:
         print(text)
         
