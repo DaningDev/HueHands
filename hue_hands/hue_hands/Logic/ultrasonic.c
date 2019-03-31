@@ -37,8 +37,8 @@ double calc_dist(int *timerOverflow)
 	/* Wait for falling edge */
 	while((TIFR1 & (1 << ICF1)) == 0);
 	
-	/* Calculate distance in cm based on 20Mhz timer frequency and the speed of sound */
+	/* Calculate distance in cm based on 16Mhz timer frequency and the speed of sound */
 	count = ICR1 + (65535 * (int)timerOverflow);
-	distance = (double)count / 1166;
+	distance = (double)count / 933;
 	return distance;
 }

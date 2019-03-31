@@ -5,10 +5,17 @@
  *  Author: danin
  */ 
 
-#define F_CPU 20000000UL
+#define F_CPU 16000000
+#define BAUD  9600
+#define BRC   ((F_CPU/16/BAUD) - 1)
+#define TX_BUFFER_SIZE	128
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+
+#include <stdio.h>
+#include <string.h>
 
 #define LED_ON		PORTD |= (1 << PORTD3)
 #define LED_OFF		PORTD &= ~(1 << PORTD3)
