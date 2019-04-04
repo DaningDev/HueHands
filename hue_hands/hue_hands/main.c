@@ -69,7 +69,7 @@ int main(void)
 			
 			/* Put the result into a char array and append \n\r for python script */
 			sprintf(data,"%.1lf", distance);
-			strcat(data, "/n");
+			strcat(data, "\n");
 			
 			/* Write the data */
 			serialWrite(data);
